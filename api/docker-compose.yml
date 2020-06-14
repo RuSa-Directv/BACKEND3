@@ -1,0 +1,21 @@
+#Docker-Compose by Rusa
+
+version: "2"
+services:
+  api:
+    container_name: api
+    build: .
+    command: bash -c "npm install && npm install nodemon -g && nodemon servidor.js"
+
+    
+    volumes:
+        - c:/tp/api:/app
+
+    ports: 
+      - "2999:2999"
+
+
+
+
+
+

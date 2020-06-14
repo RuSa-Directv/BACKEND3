@@ -1,0 +1,41 @@
+#Docker-Compose by Rusa
+
+version: "2"
+services:
+  dbgit2:
+    container_name: dbgit2
+    image: "postgres:12.2"
+    restart: always
+    environment:
+      - POSTGRES_USER=rusa
+      - POSTGRES_PASSWORD=rusa
+      - POSTGRES_DB=rusa_db
+    volumes:
+      - ./db:/data
+      - ./db/1v2.sql:/docker-entrypoint-initdb.d/10-final.sql
+            
+    ports: 
+      - "5432:5432"
+
+  apigit2:
+    container_name: apigit2
+    build: ./api
+    command: bash -c "npm install && npm install nodemon -g && nodemon servidor.js"
+    
+    volumes:
+        - ./api:/app
+
+    ports: 
+      - "2999:2999"
+
+      
+    depends_on:
+     - dbgit2
+
+
+
+
+
+
+
+
