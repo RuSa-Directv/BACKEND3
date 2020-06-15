@@ -11,9 +11,7 @@ const pool = new Pool({
 
 
 const getUsers =  async (req, res) =>{
-    console.log(req);
     const response = await pool.query('SELECT * FROM veladores order by id_veladores');
-    console.log(response.rows);
     res.status(200).json(response.rows); 
 };
 
@@ -21,7 +19,6 @@ const getUsers =  async (req, res) =>{
 
 const getSearch =  async (req, res) =>{
     like = "%" + req.params.id.toLowerCase() + "%";
-    console.log(like);
     const response = await pool.query('SELECT P.n_paises AS "Pais" ,PR.n_productos AS "pro",S.n_servicios AS "ser",A.n_aplicaciones AS "app", V.persona AS "du", E1.persona as "es1", E1.telefono as "tel1",E2.persona as "es2", E2.telefono as "tel2", E3.persona as "es3",E3.telefono as "tel3"'+ 
             ' from (servicios S inner join det_serv DS on S.id_servicios = DS.id_serv) inner join'+
             ' paises P on P.id_paises = DS.id_pai inner join'+
