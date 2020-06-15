@@ -1,16 +1,18 @@
 const { Router } = require('express');
 const router = Router();
 
-const { getUsers,createCert, getSearch, getPais, createUser } = require('./controllers');
+const { getUsers,createCert, getSearch, getPais, createUser} = require('./controllers');
 
 // test
 router.get('/users',getUsers );
 
 //buscadores
     //search
-router.get('/search',getSearch );
+router.get('/search/:id',getSearch );
     //pais
 router.get('/paises/:id',getPais);
+
+
 
 //subida
     //certificados
