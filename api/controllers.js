@@ -19,7 +19,7 @@ const getUsers =  async (req, res) =>{
 
 const getSearch =  async (req, res) =>{
     like = "%" + req.params.id.toLowerCase() + "%";
-    const response = await pool.query('SELECT P.n_paises AS "Pais" ,PR.n_productos AS "pro",S.n_servicios AS "ser",A.n_aplicaciones AS "app", V.persona AS "du", E1.persona as "es1", E1.telefono as "tel1",E2.persona as "es2", E2.telefono as "tel2", E3.persona as "es3",E3.telefono as "tel3"'+ 
+    const response = await pool.query('SELECT P.n_paises AS "Pais" ,PR.n_productos AS "pro",S.n_servicios AS "ser",A.n_aplicaciones AS "app", V.persona AS "du", V.telefono AS "tel", E1.persona as "es1", E1.telefono as "tel1",E2.persona as "es2", E2.telefono as "tel2", E3.persona as "es3",E3.telefono as "tel3"'+ 
             ' from (servicios S inner join det_serv DS on S.id_servicios = DS.id_serv) inner join'+
             ' paises P on P.id_paises = DS.id_pai inner join'+
             ' productos PR on PR.id_productos = DS.id_prod inner join'+
@@ -91,6 +91,36 @@ const createVel = async (req,res)=>{
 
 
 //END-updates--------------------------------------------------------------------------------
+//Login----------------------------------------------------------------------------------------
+
+const auth = async (req,res)=>{
+	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+	console.log(req.body);
+    const{ usuario, pass}=req.body;
+	const response = await pool.query('SELECT usuario, pass FROM usuarios WHERE usuario = $1 AND pass = $2', [usuario, pass]);
+	//response.set('Access-Control-Allow-Origin', '*');
+
+	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+	//res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+	console.log(response.rows)
+	if(response.rows == false){
+		//res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000/Login');
+		
+		res.status(401);
+		res.send('false');
+		
+	}
+	else{
+	//res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000/Login');
+
+    res.status(200).json(response.rows);
+	res.send('true');
+	}
+
+
+};
+
+//End Login----------------------------------------------------------------------------------------
 
 
 
@@ -103,5 +133,6 @@ module.exports={
     createApp,
     createPrd,
     createSrv,
-    createVel
+    createVel,
+	auth
 }
