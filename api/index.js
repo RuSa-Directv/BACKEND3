@@ -1,24 +1,60 @@
 const { Router } = require('express');
 const router = Router();
 
-const { getUsers,createCert, getSearch, getPais, createUser,auth} = require('./controllers');
+const { getUsers,createCert, getSearch, getPais, createUser,auth,getUser,
+createVel,upVel,delVel,getApp, createApp, upApp, delApp,
+getPrd,createPrd,upPrd, delPrd, getSrv, createSrv, upSrv, delSrv, 
+getPai, createPais, upPais, delPais,getCert,upCert, delCert } = require('./controllers');
 
 // test
-router.get('/users',getUsers );
+
+
 
 //buscadores
     //search
 router.get('/search/:id',getSearch );
     //pais
 router.get('/paises/:id',getPais);
+router.get('/pais',getPai);
+router.post('/addpais',createPais)
+router.post('/uppais',upPais);
+router.post('/delpais',delPais)
+
+//servicios
+router.get('/srv',getSrv );
+router.post('/addsrv',createSrv);
+router.post('/upsrv',upSrv);
+router.post('/delsrv',delSrv);
+
+//productos
+router.get('/prd',getPrd );
+router.post('/addprd',createPrd);
+router.post('/upprd',upPrd);
+router.post('/delprd',delPrd);
+
+//aplicaciones
+router.get('/app',getApp );
+router.post('/addapp',createApp);
+router.post('/upapp',upApp);
+router.post('/delapp',delApp);
 
 
-
-//subida
     //certificados
+router.get('/cert',getCert );
+router.post('/upcert',upCert);
+router.post('/delcert',delCert);
 router.post('/cert',createCert);
+
     //usuarios
+router.get('/user',getUser );	
 router.post('/adduser',createUser);
+	//veladores
+router.get('/users',getUsers );
+router.post('/addvel',createVel);
+router.post('/upvel',upVel);
+router.post('/delvel',delVel);
+
+
 
 
 //Login
