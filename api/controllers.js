@@ -70,8 +70,8 @@ const createCert = async (req,res)=>{
 const upCert = async (req,res)=>{
     const{ nombre, pais, emisor, reponsable,telefono, vencimiento, id}=req.body;
 	console.log(req.body);
-	await pool.query('UPDATE certificados SET nombre = $1, SET pais = $2, SET emisor = $3, SET reponsable = $4, SET telefono = $5, SET vencimiento = $6 WHERE id = $7', [nombre, pais, emisor, reponsable,telefono, vencimiento, id]);
-    res.send('Actualizado');
+	await pool.query('UPDATE certificados SET nombre = $1 , pais = $2 , emisor = $3 , reponsable = $4 , telefono = $5 , vencimiento = $6 WHERE id = $7', [nombre, pais, emisor, reponsable,telefono, vencimiento, id]);
+	res.send('Actualizado');
 
 };
 
