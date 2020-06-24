@@ -46,7 +46,7 @@ const getSearch =  async (req, res) =>{
 const createUser = async (req,res)=>{
     const{ usuario, pass, nombre, email}=req.body;
 	console.log(req.body);
-   await pool.query('INSERT INTO usuarios (usuario, pass, nombre, email) VALUES ($1,$2,$3,$4)', [usuario, pass, nombre, email]);
+	await pool.query('INSERT INTO usuarios (usuario, pass, nombre, email) VALUES ($1,$2,$3,$4)', [usuario, pass, nombre, email]);
     res.send('creado');
 };
 
@@ -69,8 +69,8 @@ const createCert = async (req,res)=>{
 
 const upCert = async (req,res)=>{
     const{ nombre, pais, emisor, reponsable,telefono, vencimiento, id}=req.body;
-	await pool.query('UPDATE certificados SET nombre = $1, SET pais = $2, SET emisor= $3, SET reponsable = $4, SET telefono = $5, SET vencimiento = $6 WHERE id = $7', [nombre, pais, emisor, reponsable,telefono, vencimiento, id]);
-    console.log(req.body);
+	console.log(req.body);
+	await pool.query('UPDATE certificados SET nombre = $1, SET pais = $2, SET emisor = $3, SET reponsable = $4, SET telefono = $5, SET vencimiento = $6 WHERE id = $7', [nombre, pais, emisor, reponsable,telefono, vencimiento, id]);
     res.send('Actualizado');
 
 };
