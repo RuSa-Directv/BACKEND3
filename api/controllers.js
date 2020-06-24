@@ -69,7 +69,7 @@ const createCert = async (req,res)=>{
 
 const upCert = async (req,res)=>{
     const{ nombre, pais, emisor, reponsable,telefono, vencimiento, id}=req.body;
-	await pool.query('UPDATE certificados SET nombre = $1, SET pais = $2, SET emisor= $3, SET reponsable = $4, SET telefono = $5, SET vencimiento = $6) WHERE id = $7', [nombre, pais, emisor, reponsable,telefono, vencimiento, id]);
+	await pool.query('UPDATE certificados SET nombre = $1, SET pais = $2, SET emisor= $3, SET reponsable = $4, SET telefono = $5, SET vencimiento = $6 WHERE id = $7', [nombre, pais, emisor, reponsable,telefono, vencimiento, id]);
     console.log(req.body);
     res.send('Actualizado');
 
@@ -77,7 +77,7 @@ const upCert = async (req,res)=>{
 
 const delCert = async (req,res)=>{
     const{id}=req.body;
-	await pool.query('DELETE certificados WHERE id = $1', [id]);
+	await pool.query('DELETE FROM certificados WHERE id = $1', [id]);
     console.log(req.body);
     res.send('Actualizado');
 
@@ -122,9 +122,9 @@ const upPais = async (req,res)=>{
 };
 
 const delPais = async (req,res)=>{
-	const{ id_paises}=req.body;
+	const{id_paises}=req.body;
 	console.log(req.body);
-	await pool.query('DELETE paises WHERE id_paises = $1', [id_paises]);
+	await pool.query('DELETE FROM paises WHERE id_paises = $1', [id_paises]);
     res.send('borrado');
 };
 
@@ -158,7 +158,7 @@ const upSrv = async (req,res)=>{
 const delSrv = async (req,res)=>{
 	const{ id_servicios}=req.body;
 	console.log(req.body);
-	await pool.query('DELETE servicios WHERE id_servicios = $1', [id_servicios]);
+	await pool.query('DELETE FROM servicios WHERE id_servicios = $1', [id_servicios]);
     res.send('borrado');
 };
 
@@ -192,7 +192,7 @@ const upPrd = async (req,res)=>{
 const delPrd = async (req,res)=>{
 	const{ id_productos}=req.body;
 	console.log(req.body);
-	await pool.query('DELETE productos  WHERE id_productos = $1', [id_productos]);
+	await pool.query('DELETE FROM productos  WHERE id_productos = $1', [id_productos]);
     res.send('borrado');
 };
 
@@ -223,7 +223,7 @@ const upApp = async (req,res)=>{
 const delApp = async (req,res)=>{
 	const{ id_aplicaciones}=req.body;
 	console.log(req.body);
-	await pool.query('DELETE aplicaciones WHERE id_aplicaciones = $1', [id_aplicaciones]);
+	await pool.query('DELETE FROM aplicaciones WHERE id_aplicaciones = $1', [id_aplicaciones]);
     res.send('borrado');
 };
 // FIN Aplicacion-------------------------------------------------------------------------------------
