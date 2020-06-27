@@ -75,7 +75,7 @@ const getDetApp =  async (req, res) =>{
 
 const createDetApp = async (req,res)=>{
     const{ id_aplica, resp, esc_1, esc_2,esc_3}=req.body;
-   await pool.query('INSERT INTO det_serv (id_aplica, resp, esc_1, esc_2,esc_3) VALUES ($1,$2,$3,$4,$5)', [id_aplica, resp, esc_1, esc_2,esc_3]);
+   await pool.query('INSERT INTO det_aplicaciones (id_aplica, resp, esc_1, esc_2,esc_3) VALUES ($1,$2,$3,$4,$5)', [id_aplica, resp, esc_1, esc_2,esc_3]);
     console.log(req.body);
     res.send('creado');
 };
