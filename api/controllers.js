@@ -103,9 +103,15 @@ const getPais =  async (req,res) =>{
 
 
 const getPai =  async (req, res) =>{
-    const response = await pool.query('SELECT * FROM paises order by id_paises desc');
+    const response = await pool.query('SELECT * FROM paises order by id_paises asc');
     res.status(200).json(response.rows); 
 };
+
+const getPa =  async (req, res) =>{
+    const response = await pool.query('SELECT n_paises FROM paises order by n_paises asc');
+    res.status(200).json(response.rows); 
+};
+
 
 const createPais = async (req,res)=>{
     const{ n_paises}=req.body;
@@ -201,7 +207,7 @@ const delPrd = async (req,res)=>{
 //Aplicacion--------------------------------------------------------------------------------------
 
 const getApp =  async (req, res) =>{
-    const response = await pool.query('SELECT * FROM aplicaciones order by id_aplicaciones desc');
+    const response = await pool.query('SELECT * FROM aplicaciones order by id_aplicaciones ASC');
     res.status(200).json(response.rows); 
 };
 
@@ -299,7 +305,7 @@ const auth = async (req,res)=>{
 module.exports={
 	getSearch,
     getCert, createCert, upCert, delCert,
-    getPais, getPai, createPais, upPais, delPais,
+    getPais, getPai, createPais, upPais, delPais, getPa,
 	getUser, createUser,
     getApp, createApp, upApp, delApp,
     getPrd, createPrd, upPrd, delPrd,

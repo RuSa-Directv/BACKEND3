@@ -4,7 +4,7 @@ const router = Router();
 const { getUsers,createCert, getSearch, getPais, createUser,auth,getUser,
 createVel,upVel,delVel,getApp, createApp, upApp, delApp,
 getPrd,createPrd,upPrd, delPrd, getSrv, createSrv, upSrv, delSrv, 
-getPai, createPais, upPais, delPais,getCert,upCert, delCert } = require('./controllers');
+getPai, createPais, upPais, delPais,getPa,getCert,upCert, delCert } = require('./controllers');
 
 // test
 
@@ -16,6 +16,7 @@ router.get('/search/:id',getSearch );
     //pais
 router.get('/paises/:id',getPais);
 router.get('/pais',getPai);
+router.get('/pai/',getPa);
 router.post('/addpais',createPais)
 router.post('/uppais',upPais);
 router.post('/delpais',delPais)
