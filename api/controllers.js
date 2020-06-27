@@ -63,10 +63,19 @@ const createDetSrv = async (req,res)=>{
     res.send('creado');
 
 };
+//Fin detalles de servicio -------------------------------------------------------------------------------------
+
+//detalles de aplicacione--------------------------------------------------------------------------
+
+
+const getDetApp =  async (req, res) =>{
+    const response = await pool.query('SELECT * FROM det_aplicaciones order by id_serv');
+    res.status(200).json(response.rows); 
+};
 
 
 
-
+//Fin detalles de applicaciones -------------------------------------------------------------------------------------
 
 //Certificados-------------------------------------------------------------------------------------
 
@@ -330,5 +339,6 @@ module.exports={
     getSrv, createSrv, upSrv, delSrv,
 	getUsers, createVel, upVel, delVel,
 	getDetSrv,createDetSrv,
+	getDetApp,
 	auth
 }
