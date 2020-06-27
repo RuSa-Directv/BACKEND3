@@ -12,7 +12,7 @@ services:
       - POSTGRES_DB=rusa_db
     volumes:
       - ./db:/data
-      - ./db/1v2.sql:/docker-entrypoint-initdb.d/10-final.sql
+      - ./db/1v3.sql:/docker-entrypoint-initdb.d/10-final.sql
             
     ports: 
       - "5432:5432"
