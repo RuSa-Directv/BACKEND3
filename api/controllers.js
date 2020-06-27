@@ -69,11 +69,16 @@ const createDetSrv = async (req,res)=>{
 
 
 const getDetApp =  async (req, res) =>{
-    const response = await pool.query('SELECT * FROM det_aplicaciones order by id_serv');
+    const response = await pool.query('SELECT * FROM det_aplicaciones order by id_aplica');
     res.status(200).json(response.rows); 
 };
 
-
+const createDetApp = async (req,res)=>{
+    const{ id_aplica, resp, esc_1, esc_2,esc_3}=req.body;
+   await pool.query('INSERT INTO det_serv (id_aplica, resp, esc_1, esc_2,esc_3) VALUES ($1,$2,$3,$4,$5)', [id_aplica, resp, esc_1, esc_2,esc_3]);
+    console.log(req.body);
+    res.send('creado');
+};
 
 //Fin detalles de applicaciones -------------------------------------------------------------------------------------
 
@@ -339,6 +344,6 @@ module.exports={
     getSrv, createSrv, upSrv, delSrv,
 	getUsers, createVel, upVel, delVel,
 	getDetSrv,createDetSrv,
-	getDetApp,
+	getDetApp,createDetApp,
 	auth
 }
