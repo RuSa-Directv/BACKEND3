@@ -3,7 +3,7 @@ const router = Router();
 
 const { getUsers,createCert, getSearch, getPais, createUser,auth,getUser,
 createVel,upVel,delVel,getApp, createApp, upApp, delApp,
-getPrd,createPrd,upPrd, delPrd, getSrv, createSrv, upSrv, delSrv, 
+getPrd,createPrd,upPrd, delPrd, getSrv, createSrv, upSrv, delSrv, getDetSrv,
 getPai, createPais, upPais, delPais,getPa,getCert,upCert, delCert } = require('./controllers');
 
 // test
@@ -13,6 +13,10 @@ getPai, createPais, upPais, delPais,getPa,getCert,upCert, delCert } = require('.
 //buscadores
     //search
 router.get('/search/:id',getSearch );
+//detalles
+router.get('/det_serv/',getDetSrv);
+
+
     //pais
 router.get('/paises/:id',getPais);
 router.get('/pais',getPai);

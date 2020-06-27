@@ -50,6 +50,18 @@ const createUser = async (req,res)=>{
     res.send('creado');
 };
 
+//detalles de servicio--------------------------------------------------------------------------
+const getDetSrv =  async (req, res) =>{
+    const response = await pool.query('SELECT * FROM det_serv order by id_serv');
+    res.status(200).json(response.rows); 
+};
+
+
+
+
+
+
+
 //Certificados-------------------------------------------------------------------------------------
 
 
@@ -311,5 +323,6 @@ module.exports={
     getPrd, createPrd, upPrd, delPrd,
     getSrv, createSrv, upSrv, delSrv,
 	getUsers, createVel, upVel, delVel,
+	getDetSrv,
 	auth
 }
