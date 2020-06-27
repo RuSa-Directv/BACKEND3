@@ -56,7 +56,7 @@ const getDetSrv =  async (req, res) =>{
     res.status(200).json(response.rows); 
 };
 
-const createSrv = async (req,res)=>{
+const createDetSrv = async (req,res)=>{
     const{ id_serv, id_prod, id_pai, id_aplica}=req.body;
    await pool.query('INSERT INTO det_serv (id_serv, id_prod, id_pai, id_aplica) VALUES ($1,$2,$3,$4)', [id_serv, id_prod, id_pai, id_aplica]);
     console.log(req.body);
@@ -329,6 +329,6 @@ module.exports={
     getPrd, createPrd, upPrd, delPrd,
     getSrv, createSrv, upSrv, delSrv,
 	getUsers, createVel, upVel, delVel,
-	getDetSrv,createSrv,
+	getDetSrv,createDetSrv,
 	auth
 }
