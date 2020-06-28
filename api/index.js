@@ -3,8 +3,8 @@ const router = Router();
 
 const { getUsers,createCert, getSearch, getPais, createUser,auth,getUser,
 createVel,upVel,delVel,getApp, createApp, upApp, delApp,
-getPrd,createPrd,upPrd, delPrd, getSrv, createSrv, upSrv, delSrv, getDetSrv, createDetSrv,
-getDetApp,createDetApp,
+getPrd,createPrd,upPrd, delPrd, getSrv, createSrv, upSrv, delSrv, getDetSrv, createDetSrv, upDetSrv,delDetSrv,
+getDetApp,createDetApp,upDetApp,delDetApp,
 getPai, createPais, upPais, delPais,getPa,getCert,upCert, delCert } = require('./controllers');
 
 // test
@@ -17,10 +17,18 @@ router.get('/search/:id',getSearch );
 //detalles
 router.get('/det_serv/',getDetSrv);
 router.post('/adddetsrv',createDetSrv);
+router.post('/updetsrv',upDetSrv);
+router.post('/deldetsrv',delDetSrv);
 
 
 router.get('/det_app/',getDetApp);
 router.post('/adddetapp',createDetApp);
+router.post('/updetapp',upDetApp);
+router.post('/deldetapp',delDetApp);
+
+
+
+
 
     //pais
 router.get('/paises/:id',getPais);

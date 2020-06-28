@@ -63,6 +63,27 @@ const createDetSrv = async (req,res)=>{
     res.send('creado');
 
 };
+
+
+const upDetSrv = async (req,res)=>{
+    const{ id_serv, id_prod, id_pai, id_aplica, id}=req.body;
+	console.log(req.body);
+	await pool.query('UPDATE det_serv SET id_serv = $1 , id_prod = $2 , id_pai = $3 , id_aplica = $4 WHERE id = $5', [id_serv, id_prod, id_pai, id_aplica, id]);
+	res.send('Actualizado');
+
+};
+
+const delDetSrv = async (req,res)=>{
+    const{id}=req.body;
+	await pool.query('DELETE FROM det_serv WHERE id = $1', [id]);
+    console.log(req.body);
+    res.send('Actualizado');
+
+};
+
+
+
+
 //Fin detalles de servicio -------------------------------------------------------------------------------------
 
 //detalles de aplicacione--------------------------------------------------------------------------
@@ -79,6 +100,32 @@ const createDetApp = async (req,res)=>{
     console.log(req.body);
     res.send('creado');
 };
+
+
+const upDetApp = async (req,res)=>{
+    const{ id_aplica, resp, esc_1, esc_2,esc_3, id}=req.body;
+	console.log(req.body);
+	await pool.query('UPDATE det_aplicaciones SET id_aplica = $1 , resp = $2 , esc_1 = $3 , esc_2 = $4,esc_3 = $5  WHERE id = $6', [id_aplica, resp, esc_1, esc_2,esc_3, id]);
+	res.send('Actualizado');
+
+};
+
+const delDetApp = async (req,res)=>{
+    const{id}=req.body;
+	await pool.query('DELETE FROM det_aplicaciones WHERE id = $1', [id]);
+    console.log(req.body);
+    res.send('Actualizado');
+
+};
+
+
+
+
+
+
+
+
+
 
 //Fin detalles de applicaciones -------------------------------------------------------------------------------------
 
@@ -343,7 +390,7 @@ module.exports={
     getPrd, createPrd, upPrd, delPrd,
     getSrv, createSrv, upSrv, delSrv,
 	getUsers, createVel, upVel, delVel,
-	getDetSrv,createDetSrv,
-	getDetApp,createDetApp,
+	getDetSrv,createDetSrv,upDetSrv,delDetSrv,
+	getDetApp,createDetApp,upDetApp,delDetApp,
 	auth
 }
