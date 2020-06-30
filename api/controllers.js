@@ -1,5 +1,49 @@
 const {Pool}= require('pg');
 
+const jwt = require('jsonwebtoken');
+
+function createToken (user) {
+  return jwt.sign({user},'miclaveultrasecreta123*',{expiresIn: 180});
+};
+
+
+function priv(req,res,next){
+	if (!req.headers['token'])
+	{
+		console.log("no logueado");
+		return res.status(403).json({ mensaje: 'No Logueado' })
+		//.send('Sin Token');
+		//.redirect('/login');
+	}
+	else{
+	//console.log("1");
+	const token = req.headers['token'];
+	//console.log(token);
+	jwt.verify(token, 'miclaveultrasecreta123*', (err, decoded) => {
+    if(err) 
+	{
+		console.log("token Incorrecto");
+		return res.status(666).json({ mensaje: 'Token Invalido' });
+		  //.redirect('/login');
+    }
+	else{
+	//res.json({ mensaje: "token ok"})
+	console.log("token ok");
+    next(); // payload verificado, prosigue ;)
+	}
+	
+	  });
+
+	}
+
+};
+
+
+
+
+
+
+
 const pool = new Pool({
     host:'dbgit2',
     user: 'rusa',
@@ -7,6 +51,102 @@ const pool = new Pool({
     database: 'rusa_db',
     port: '5432'
 });
+
+
+const Login = async (req,res)=>{
+	console.log(req.body);
+	res.send('Inicio');
+	
+};
+
+
+
+
+const Logina = async (req,res,next)=>{
+	const{ usuario, pass}=req.body;
+	const response = await pool.query('SELECT usuario, pass FROM usuarios WHERE usuario = $1 AND pass = $2', [usuario, pass]);
+	if(response.rows == false)
+	{	
+		res.status(401).json({ mensaje: "Usuario o contraseña incorrectos"});
+		//res.send('false');
+		
+	}
+	else
+	{
+	const payload = {check:  true};
+	const token = createToken(req.body.usuario)
+	  //res.json({mensaje: 'Autenticación correcta',token: token});
+    res.status(200).json({token : token});
+	//res.send('true');
+	
+	}
+
+};
+
+
+const Logine =  async (req, res, next) =>{
+	if (!req.headers['token'])
+	{
+		console.log("no logueado");
+		return res.status(403).json({ mensaje: 'No Logueado' });
+		//.redirect('/login');
+	}
+	else{
+	console.log("1");
+	const token = req.headers['token'];
+	console.log(token);
+	jwt.verify(token, 'miclaveultrasecreta123*', (err, decoded) => {
+    if(err) 
+	{
+		console.log("token Incorrecyo");
+		return res.status(403).json({ mensaje: 'Token Invalido' });
+		  //.redirect('/login');
+    }
+	else{
+	res.json({ mensaje: "token ok"})
+	console.log("token ok");
+    //next(); // payload verificado, prosigue ;)
+	}
+	
+	  });
+
+	}
+};
+
+
+
+
+
+
+
+
+const auth = async (req,res)=>{
+	console.log(req.body);
+    const{ usuario, pass}=req.body;
+	const response = await pool.query('SELECT usuario, pass FROM usuarios WHERE usuario = $1 AND pass = $2', [usuario, pass]);
+
+	console.log(response.rows)
+	if(response.rows == false){
+
+		
+		res.status(401).json({estado: 'false'});
+		
+	}
+	else{
+
+    res.status(200).json(response.rows);
+	//res.send('true');
+	}
+
+
+};
+
+
+
+
+
+
+
 
 
 
@@ -138,9 +278,10 @@ const getCert =  async (req, res) =>{
 };
 
 const createCert = async (req,res)=>{
+	console.log(req.body);
     const{ nombre, pais, emisor, reponsable,telefono, vencimiento}=req.body;
    await pool.query('INSERT INTO certificados (nombre, pais, emisor, reponsable,telefono, vencimiento) VALUES ($1,$2,$3,$4,$5,$6)', [nombre, pais, emisor, reponsable,telefono, vencimiento]);
-    console.log(req.body);
+
     res.send('creado');
 
 };
@@ -313,7 +454,7 @@ const delApp = async (req,res)=>{
 };
 // FIN Aplicacion-------------------------------------------------------------------------------------
 
-//Veladores-------------------------------------------------------------------------------------
+//Veladores------------------------------------------------------------------------------------
 
 const getUsers =  async (req, res) =>{
     const response = await pool.query('SELECT id_veladores, persona as persona, telefono as telefono, sup_inmediato as sup_inmediato, departamento as departamento FROM veladores order by id_veladores desc');
@@ -347,35 +488,9 @@ const delVel = async (req,res)=>{
 
 
 
-
+   
 //Login----------------------------------------------------------------------------------------
 
-const auth = async (req,res)=>{
-	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-	console.log(req.body);
-    const{ usuario, pass}=req.body;
-	const response = await pool.query('SELECT usuario, pass FROM usuarios WHERE usuario = $1 AND pass = $2', [usuario, pass]);
-	//response.set('Access-Control-Allow-Origin', '*');
-
-	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-	//res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-	console.log(response.rows)
-	if(response.rows == false){
-		//res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000/Login');
-		
-		res.status(401);
-		res.send('false');
-		
-	}
-	else{
-	//res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000/Login');
-
-    res.status(200).json(response.rows);
-	res.send('true');
-	}
-
-
-};
 
 //FIN Login----------------------------------------------------------------------------------------
 
@@ -392,5 +507,5 @@ module.exports={
 	getUsers, createVel, upVel, delVel,
 	getDetSrv,createDetSrv,upDetSrv,delDetSrv,
 	getDetApp,createDetApp,upDetApp,delDetApp,
-	auth
+	auth, Login, Logina, Logine, priv
 }

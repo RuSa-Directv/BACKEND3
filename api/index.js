@@ -1,13 +1,34 @@
 const { Router } = require('express');
 const router = Router();
 
+
+
 const { getUsers,createCert, getSearch, getPais, createUser,auth,getUser,
 createVel,upVel,delVel,getApp, createApp, upApp, delApp,
 getPrd,createPrd,upPrd, delPrd, getSrv, createSrv, upSrv, delSrv, getDetSrv, createDetSrv, upDetSrv,delDetSrv,
-getDetApp,createDetApp,upDetApp,delDetApp,
+getDetApp,createDetApp,upDetApp,delDetApp, Login, Logina, Logine, priv,
 getPai, createPais, upPais, delPais,getPa,getCert,upCert, delCert } = require('./controllers');
 
 // test
+
+
+
+//login
+
+
+
+router.post('/auth',auth);
+
+
+router.post('/login',priv,Login);
+router.post('/logina',Logina);
+router.get('/logine',Logine);
+
+
+
+
+
+
 
 
 
@@ -59,9 +80,9 @@ router.post('/delapp',delApp);
 
     //certificados
 router.get('/cert',getCert );
-router.post('/upcert',upCert);
-router.post('/delcert',delCert);
-router.post('/cert',createCert);
+router.post('/upcert',priv,upCert);
+router.post('/delcert',priv,delCert);
+router.post('/cert',priv,createCert);
 
     //usuarios
 router.get('/user',getUser );	
@@ -75,7 +96,6 @@ router.post('/delvel',delVel);
 
 
 
-//Login
-router.post('/auth',auth);
+
 
 module.exports = router;

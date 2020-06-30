@@ -456,6 +456,7 @@
       "resolved": "https://registry.npmjs.org/json-buffer/-/json-buffer-3.0.0.tgz",
       "version": "3.0.0"
     },
+    "jsonwebtoken": "^8.5.1",
     "keyv": {
       "integrity": "sha512-9ykJ/46SN/9KPM/sichzQ7OvXyGDYKGTaDlKMGCAlg2UK8KRy4jb0d8sFc+0Tt0YYnThq8X2RZgCg74RPxgcVA==",
       "requires": {

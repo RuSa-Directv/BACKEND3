@@ -20,7 +20,7 @@ services:
   apigit2:
     container_name: apigit2
     build: ./api
-    command: bash -c "npm install && npm install nodemon -g && nodemon servidor.js"
+    command: bash -c "npm install && npm install jsonwebtoken && npm install nodemon -g && nodemon servidor.js"
     
     volumes:
         - ./api:/app
