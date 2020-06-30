@@ -55,27 +55,27 @@ router.post('/deldetapp',delDetApp);
 router.get('/paises/:id',getPais);
 router.get('/pais',getPai);
 router.get('/pai/',getPa);
-router.post('/addpais',createPais)
-router.post('/uppais',upPais);
-router.post('/delpais',delPais)
+router.post('/addpais',priv,createPais)
+router.post('/uppais',priv,upPais);
+router.post('/delpais',priv,delPais)
 
 //servicios
 router.get('/srv',getSrv );
-router.post('/addsrv',createSrv);
-router.post('/upsrv',upSrv);
-router.post('/delsrv',delSrv);
+router.post('/addsrv',priv,createSrv);
+router.post('/upsrv',priv,upSrv);
+router.post('/delsrv',priv,delSrv);
 
 //productos
 router.get('/prd',getPrd );
-router.post('/addprd',createPrd);
-router.post('/upprd',upPrd);
-router.post('/delprd',delPrd);
+router.post('/addprd',priv,createPrd);
+router.post('/upprd',priv,upPrd);
+router.post('/delprd',priv,delPrd);
 
 //aplicaciones
 router.get('/app',getApp );
-router.post('/addapp',createApp);
-router.post('/upapp',upApp);
-router.post('/delapp',delApp);
+router.post('/addapp',priv,createApp);
+router.post('/upapp',priv,upApp);
+router.post('/delapp',priv,delApp);
 
 
     //certificados
