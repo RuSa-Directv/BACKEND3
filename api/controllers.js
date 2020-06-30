@@ -154,7 +154,7 @@ const auth = async (req,res)=>{
 
 const getUser =  async (req, res) =>{
     const response = await pool.query('SELECT usuario, pass, nombre, email FROM usuarios order by id_user');
-    res.status(200).json(response.rows); 
+    //res.status(200).json(response.rows); 
 };
 
 
