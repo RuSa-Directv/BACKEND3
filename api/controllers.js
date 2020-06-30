@@ -197,8 +197,8 @@ const getDetSrv =  async (req, res) =>{
 };
 
 const createDetSrv = async (req,res)=>{
-    const{ id_serv, id_prod, id_pai, id_aplica}=req.body;
-   await pool.query('INSERT INTO det_serv (id_serv, id_prod, id_pai, id_aplica) VALUES ($1,$2,$3,$4)', [id_serv, id_prod, id_pai, id_aplica]);
+    const{ id_serv, id_prod, id_pai, id_aplica, ponderacion}=req.body;
+   await pool.query('INSERT INTO det_serv (id_serv, id_prod, id_pai, id_aplica, ponderacion) VALUES ($1,$2,$3,$4,$5)', [id_serv, id_prod, id_pai, id_aplica, ponderacion]);
     console.log(req.body);
     res.send('creado');
 
@@ -206,9 +206,9 @@ const createDetSrv = async (req,res)=>{
 
 
 const upDetSrv = async (req,res)=>{
-    const{ id_serv, id_prod, id_pai, id_aplica, id}=req.body;
+    const{ id_serv, id_prod, id_pai, id_aplica, id, ponderacion}=req.body;
 	console.log(req.body);
-	await pool.query('UPDATE det_serv SET id_serv = $1 , id_prod = $2 , id_pai = $3 , id_aplica = $4 WHERE id = $5', [id_serv, id_prod, id_pai, id_aplica, id]);
+	await pool.query('UPDATE det_serv SET id_serv = $1 , id_prod = $2 , id_pai = $3 , id_aplica = $4 , ponderacion = $6 WHERE id = $5', [id_serv, id_prod, id_pai, id_aplica, id, ponderacion]);
 	res.send('Actualizado');
 
 };
