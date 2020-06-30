@@ -89,9 +89,9 @@ router.get('/user',getUser );
 router.post('/adduser',createUser);
 	//veladores
 router.get('/users',getUsers );
-router.post('/addvel',createVel);
-router.post('/upvel',upVel);
-router.post('/delvel',delVel);
+router.post('/addvel',priv,createVel);
+router.post('/upvel',priv,upVel);
+router.post('/delvel',priv,delVel);
 
 
 
