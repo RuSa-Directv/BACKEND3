@@ -145,22 +145,23 @@ const auth = async (req,res)=>{
 const pass = async (req,res)=>{
     const{ usuario, pass, passold}=req.body;
 	const response1 = await pool.query('SELECT usuario, pass FROM usuarios WHERE usuario = $1 AND pass = $2', [usuario, passold]);
-	if(passold !== response1.passold)
+	if(response1.rows == false)
 	{
-	res.status(444).send('false');
+			res.status(444).send('false');
 	}
 	else
 	{
-	const response = await pool.query('UPDATE usuarios SET pass = $2 WHERE usuario = $1', [usuario, pass]);
-	if(response.rowCount === 0){
-	res.status(444).send('false');
+		const response = await pool.query('UPDATE usuarios SET pass = $2 WHERE usuario = $1', [usuario, pass]);
+		if(response.rowCount === 0)
+		{
+			res.status(444).send('false');
+		}
+		else
+		{
+			res.status(200).send('true');
+		}
 	}
-	else{
-		
-    res.status(200).send('true');
 
-	}
-	}
 };
 
 
