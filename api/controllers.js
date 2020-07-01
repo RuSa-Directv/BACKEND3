@@ -142,13 +142,18 @@ const auth = async (req,res)=>{
 };
 
 
+const pass = async (req,res)=>{
+    const{ usuario, pass}=req.body;
+	const response = await pool.query('UPDATE usuarios SET pass = $2 WHERE usuario = $1', [usuario, pass]);
+	if(response.rowCount === 0){
+	res.status(444).send('false');
+	}
+	else{
+		
+    res.status(200).send('true');
 
-
-
-
-
-
-
+	}
+};
 
 
 
@@ -156,8 +161,6 @@ const getUser =  async (req, res) =>{
     const response = await pool.query('SELECT usuario, pass, nombre, email FROM usuarios order by id_user');
     //res.status(200).json(response.rows); 
 };
-
-
 
 
 const getSearch =  async (req, res) =>{
@@ -507,5 +510,5 @@ module.exports={
 	getUsers, createVel, upVel, delVel,
 	getDetSrv,createDetSrv,upDetSrv,delDetSrv,
 	getDetApp,createDetApp,upDetApp,delDetApp,
-	auth, Login, Logina, Logine, priv
+	auth, Login, Logina, Logine, priv, pass
 }

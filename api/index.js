@@ -6,7 +6,7 @@ const router = Router();
 const { getUsers,createCert, getSearch, getPais, createUser,auth,getUser,
 createVel,upVel,delVel,getApp, createApp, upApp, delApp,
 getPrd,createPrd,upPrd, delPrd, getSrv, createSrv, upSrv, delSrv, getDetSrv, createDetSrv, upDetSrv,delDetSrv,
-getDetApp,createDetApp,upDetApp,delDetApp, Login, Logina, Logine, priv,
+getDetApp,createDetApp,upDetApp,delDetApp, Login, Logina, Logine, priv, pass,
 getPai, createPais, upPais, delPais,getPa,getCert,upCert, delCert } = require('./controllers');
 
 // test
@@ -23,6 +23,8 @@ router.post('/auth',auth);
 router.post('/login',priv,Login);
 router.post('/logina',Logina);
 router.get('/logine',Logine);
+
+router.post('/pass',priv,pass);
 
 
 
