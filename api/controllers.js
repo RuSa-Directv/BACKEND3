@@ -285,7 +285,8 @@ const delDetApp = async (req,res)=>{
 
 
 const getCert =  async (req, res) =>{
-    const response = await pool.query('SELECT * FROM certificados order by id');
+	const fecha = "DD/MM/YYYY";
+    const response = await pool.query('SELECT id, nombre , pais ,emisor ,reponsable ,telefono, to_char(vencimiento, $1) as vencimiento FROM certificados order by id', [fecha]);
     res.status(200).json(response.rows); 
 };
 
